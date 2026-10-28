@@ -1,7 +1,9 @@
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 class Book {
+
     int bookId;
     String title;
     String author;
@@ -33,16 +35,31 @@ class Book {
         num.add(b);
 
     }
+   static boolean found ;
+    static void serach (){
+        found=false;
+        System.out.print("Enter book id : ");
+        Scanner sc = new Scanner(System.in);
+        int id = sc.nextInt();
+        for( int i =0;i<num.size();i++){
+            if(num.get(i).bookId==id) {
+                num.get(i).Display_Details();
+                found = true;
+            }
+        }if(!found){
+            System.out.println("Book Not Found");
+        }
+    }
 
     static ArrayList<Book> num = new ArrayList<>();
 
     public static void main(String[] args) {
 
         Add_book();
-        for(int i =0;i< num.size();i++){
+        for(int i =0;i< num.size();i++) {
             num.get(i).Display_Details();
-
         }
+            serach();
 
 
 
