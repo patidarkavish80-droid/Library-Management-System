@@ -108,6 +108,13 @@ class Book {
             System.out.println("Book not found ");
         }
     }
+    static void Total_Book(){
+        int count =0;
+        for(int i=0;i<num.size();i++){
+            count++;
+        }
+        System.out.println("Total Books : "+count);
+    }
 
 
     static ArrayList<Book> num = new ArrayList<>();
@@ -120,7 +127,8 @@ class Book {
             System.out.println("3.Search Book ");
             System.out.println("4.issue Book ");
             System.out.println("5.Return Book ");
-            System.out.println("6.Exit");
+            System.out.println("6.Total Books ");
+            System.out.println("7.Exit");
             System.out.println();
             System.out.print("Enter choice : ");
             Scanner sc = new Scanner(System.in);
@@ -145,6 +153,9 @@ class Book {
                     return_book();
                     break;
                 case 6:
+                    Total_Book();
+                    break;
+                case 7 :
                     return;
                 default:
                     System.out.println("Invalid choice");
