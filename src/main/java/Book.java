@@ -80,6 +80,26 @@ class Book {
             System.out.println("Book not found!");
         }
     }
+    static void return_book(){
+        System.out.print("Enter book id : ");
+        Scanner sc = new Scanner(System.in);
+        int bookid = sc.nextInt();
+        for (int i =0;i<num.size();i++){
+            if(num.get(i).bookId==bookid){
+                found = false;
+
+                if(num.get(i).available==false){
+                    num.get(i).available=true;
+                    System.out.println("Book return successfully!");
+                }else{
+                    System.out.println("Book not issue");
+                }
+            }
+        }if(found){
+            System.out.println("Book not found ");
+        }
+    }
+
 
     static ArrayList<Book> num = new ArrayList<>();
 
@@ -90,7 +110,8 @@ class Book {
             System.out.println("2.Display Book ");
             System.out.println("3.Search Book ");
             System.out.println("4.issue Book ");
-            System.out.println("5.Exit");
+            System.out.println("5.Return Book ");
+            System.out.println("6.Exit");
             System.out.println();
             System.out.print("Enter choice : ");
             Scanner sc = new Scanner(System.in);
@@ -111,7 +132,10 @@ class Book {
                 case 4:
                     issue_book();
                     break;
-                case 5:
+                case 5 :
+                    return_book();
+                    break;
+                case 6:
                     return;
                 default:
                     System.out.println("Invalid choice");
