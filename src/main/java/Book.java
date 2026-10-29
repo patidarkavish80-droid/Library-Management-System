@@ -27,6 +27,15 @@ class Book {
         System.out.print("Enter book id : ");
         Scanner sc = new Scanner(System.in);
         int book_id = sc.nextInt();
+        for (int i=0;i<num.size();i++){
+            if(num.get(i).bookId==book_id){
+                found = true;
+            }
+        }
+        if(found){
+            System.out.println("Book ID already exists!");
+            return;
+        }
         sc.nextLine();
         System.out.print("Enter book title : ");
         String title = sc.nextLine();
