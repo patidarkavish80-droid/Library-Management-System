@@ -24,6 +24,7 @@ class Book {
     }
 
     static void Add_book() {
+        boolean found = false;
         System.out.print("Enter book id : ");
         Scanner sc = new Scanner(System.in);
         int book_id = sc.nextInt();
@@ -109,18 +110,30 @@ class Book {
         }
     }
     static void Total_Book(){
-        int count =0;
-        for(int i=0;i<num.size();i++){
-            count++;
-        }
-        System.out.println("Total Books : "+count);
+        System.out.println("Total Books : "+num.size());
     }
+    static void Book_Status(){
+        int count_available=0;
+        int count_issue=0;
+        for( int i=0;i<num.size();i++){
+            if(num.get(i).available==true){
+                count_available++;
+            }else {
+                count_issue++;
+            }
+        }
+        System.out.println("Available Count : "+count_available);
+        System.out.println("Issue Count : "+count_issue);
+
+    }
+
 
 
     static ArrayList<Book> num = new ArrayList<>();
 
     public static void main(String[] args) {
         while (true) {
+            System.out.println();
             System.out.println("==================== LIBRARY MANAGEMENT SYSTEM ====================");
             System.out.println("1.Add Book ");
             System.out.println("2.Display Book ");
@@ -128,7 +141,8 @@ class Book {
             System.out.println("4.issue Book ");
             System.out.println("5.Return Book ");
             System.out.println("6.Total Books ");
-            System.out.println("7.Exit");
+            System.out.println("7.Book Status ");
+            System.out.println("8.Exit");
             System.out.println();
             System.out.print("Enter choice : ");
             Scanner sc = new Scanner(System.in);
@@ -155,7 +169,10 @@ class Book {
                 case 6:
                     Total_Book();
                     break;
-                case 7 :
+                case 7:
+                    Book_Status();
+                    break;
+                case 8 :
                     return;
                 default:
                     System.out.println("Invalid choice");
