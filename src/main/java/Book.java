@@ -126,6 +126,21 @@ class Book {
         System.out.println("Issue Count : "+count_issue);
 
     }
+    static void delete_book(){
+        found=true;
+        System.out.print("Enter book id : ");
+        Scanner sc = new Scanner(System.in);
+        int bookid = sc.nextInt();
+        for (int i=0;i< num.size();i++){
+            if(num.get(i).bookId==bookid){
+                num.remove(i);
+                System.out.println("Delete book successful!!");
+                found=false;
+            }
+        }if(found){
+            System.out.println("Book Not Found");
+        }
+    }
 
 
 
@@ -142,7 +157,8 @@ class Book {
             System.out.println("5.Return Book ");
             System.out.println("6.Total Books ");
             System.out.println("7.Book Status ");
-            System.out.println("8.Exit");
+            System.out.println("8.Delete Books ");
+            System.out.println("9.Exit");
             System.out.println();
             System.out.print("Enter choice : ");
             Scanner sc = new Scanner(System.in);
@@ -172,7 +188,10 @@ class Book {
                 case 7:
                     Book_Status();
                     break;
-                case 8 :
+                case 8:
+                    delete_book();
+                    break;
+                case 9 :
                     return;
                 default:
                     System.out.println("Invalid choice");
