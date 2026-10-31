@@ -44,6 +44,7 @@ class Book {
         String author = sc.nextLine();
         Book b = new Book(book_id, title, author);
         num.add(b);
+        System.out.println("Add book successful");
 
     }
 
