@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 class Student {
-    int studentID;
+    String studentID;
     String name;
     String email;
 
-    Student(int studentID, String name, String email) {
+    Student(String studentID, String name, String email) {
         this.studentID = studentID;
         this.name = name;
         this.email = email;
@@ -21,16 +21,15 @@ class Student {
         boolean found = false;
         System.out.print("Enter student id :");
         Scanner sc = new Scanner(System.in);
-        int id = sc.nextInt();
+        String id = sc.nextLine();
         for(int i=0;i<details.size();i++){
-            if(details.get(i).studentID==id){
+            if(details.get(i).studentID.equals(id)){
                 found =true;
             }
         }if(found){
             System.out.println("Student already exist");
             return ;
         }
-        sc.nextLine();
         System.out.print("Enter name : ");
         String name = sc.nextLine();
         System.out.print("Enter email : ");
@@ -44,9 +43,9 @@ class Student {
         boolean found = false;
         System.out.print("Enter student id :");
         Scanner sc = new Scanner(System.in);
-        int id = sc.nextInt();
+        String id = sc.nextLine();
         for (int i = 0; i < details.size(); i++) {
-            if (details.get(i).studentID == id) {
+            if (details.get(i).studentID.equals( id)) {
                 details.get(i).Display_Students();
                 found = true;
                 break;
@@ -54,15 +53,16 @@ class Student {
         }
         if (!found) {
             System.out.println("Student Not Found");
+            return;
         }
     }
     static void Delete_student(){
         boolean found = false;
         System.out.print("Enter student id :");
         Scanner sc = new Scanner(System.in);
-        int id = sc.nextInt();
+        String id = sc.nextLine();
         for (int i = 0; i < details.size(); i++) {
-            if (details.get(i).studentID == id) {
+            if (details.get(i).studentID.equals(id)) {
                 details.remove(i);
                 System.out.println("delete successful");
                 found= true;
@@ -79,6 +79,6 @@ class Student {
 
     static ArrayList<Student> details = new ArrayList<>();
     public static void main(String[] args) {
-
+    Add_Student();
     }
 }
