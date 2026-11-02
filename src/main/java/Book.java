@@ -116,16 +116,17 @@ class Book {
         int bookid = sc.nextInt();
         for (int i =0;i<num.size();i++){
             if(num.get(i).bookId==bookid){
-                found = false;
-
-                if(num.get(i).available==false){
+                found = true;
+                if(num.get(i).available==false) {
                     num.get(i).available=true;
+                    num.get(i).issuedToStudent=null;
+
                     System.out.println("Book return successfully!");
                 }else{
                     System.out.println("Book not issue");
                 }
             }
-        }if(found){
+        }if(!found){
             System.out.println("Book not found ");
         }
     }
