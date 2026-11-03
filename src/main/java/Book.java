@@ -192,7 +192,9 @@ class Book {
             String line;
 
             while ((line = br.readLine()) != null) {
-
+                if (line.isBlank()) {
+                    continue;
+                }
                 String[] data = line.split(",");
 
                 int id = Integer.parseInt(data[0]);
@@ -215,6 +217,7 @@ class Book {
 
     public static void main(String[] args) throws IOException {
         loadBooks();
+        Student.loading();
         while (true) {
             System.out.println();
             System.out.println("==================== LIBRARY MANAGEMENT SYSTEM ====================");

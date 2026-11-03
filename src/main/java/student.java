@@ -1,6 +1,5 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.Scanner;
 class Student {
@@ -28,8 +27,8 @@ class Student {
         for(int i=0;i<details.size();i++){
             if(details.get(i).studentID.equals(id)){
                 found =true;
-            }
-        }if(found){
+                }
+            }if(found){
             System.out.println("Student already exist");
             return ;
         }
@@ -39,6 +38,13 @@ class Student {
         String email = sc.nextLine();
         Student s = new Student(id, name, email);
         details.add(s);
+        try{FileWriter w = new FileWriter("student.txt",true);
+            w.write(s.studentID+";"+s.name+";"+s.email+"\n");
+            w.close();
+            System.out.println("Student add successful");
+        } catch (IOException e) {
+            System.out.println("Error saving book");
+        }
 
     }
 
@@ -79,10 +85,35 @@ class Student {
             details.get(i).Display_Students();
         }
 
+    }static void loading(){
+      try {
+          BufferedReader bf = new BufferedReader(new FileReader("student.txt"));
+          String line;
+          while ((line = bf.readLine())!=null) {
+
+              if (line.isBlank()) {
+                  continue;
+              }
+              String[] data = line.split(";");
+              String Studentid =data[0];
+              String name = data[1];
+              String email = data[2];
+
+              Student s = new Student(Studentid, name, email);
+              details.add(s);
+          }
+          bf.close();
+      }catch (IOException e){
+          System.out.println("Error loading ");
+      }
+
+
     }
 
     static ArrayList<Student> details = new ArrayList<>();
     public static void main(String[] args) throws IOException {
+
+
 
 
 

@@ -1,5 +1,3 @@
-101,kavish,patidar
-2,wwd,s
-101,k,p
-150,k,l
-102,l,p
+
+101,system and designer ,shelly
+102,modern statistical system ,karian 
