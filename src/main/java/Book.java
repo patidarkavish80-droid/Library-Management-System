@@ -1,4 +1,6 @@
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -183,11 +185,36 @@ class Book {
             System.out.println("Book Not Found");
         }
     }
+    static void loadBooks() {
+        try {
+            BufferedReader br = new BufferedReader(new  FileReader("book.txt"));
+
+            String line;
+
+            while ((line = br.readLine()) != null) {
+
+                String[] data = line.split(",");
+
+                int id = Integer.parseInt(data[0]);
+                String title = data[1];
+                String author = data[2];
+
+                Book b = new Book(id, title, author);
+                num.add(b);
+            }
+
+            br.close();
+
+        } catch (IOException e) {
+            System.out.println("Error loading books!");
+        }
+    }
 
 
     static ArrayList<Book> num = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
+        loadBooks();
         while (true) {
             System.out.println();
             System.out.println("==================== LIBRARY MANAGEMENT SYSTEM ====================");
