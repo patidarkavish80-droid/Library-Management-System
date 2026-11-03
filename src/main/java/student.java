@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 class Student {
@@ -66,6 +69,7 @@ class Student {
                 details.remove(i);
                 System.out.println("delete successful");
                 found= true;
+                break;
             }
         }if(!found){
             System.out.println("Student Not Found");
@@ -78,7 +82,9 @@ class Student {
     }
 
     static ArrayList<Student> details = new ArrayList<>();
-    public static void main(String[] args) {
-    Add_Student();
+    public static void main(String[] args) throws IOException {
+
+
+
     }
 }

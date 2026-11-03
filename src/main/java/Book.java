@@ -1,4 +1,6 @@
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -28,17 +30,17 @@ class Book {
         System.out.println();
     }
 
-    static void Add_book() {
+    static void Add_book() throws IOException {
         boolean found = false;
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter book id : ");
         int book_id = sc.nextInt();
-        for (int i=0;i<num.size();i++){
-            if(num.get(i).bookId==book_id){
+        for (int i = 0; i < num.size(); i++) {
+            if (num.get(i).bookId == book_id) {
                 found = true;
             }
         }
-        if(found){
+        if (found) {
             System.out.println("Book ID already exists!");
             return;
         }
@@ -49,9 +51,18 @@ class Book {
         String author = sc.nextLine();
         Book b = new Book(book_id, title, author);
         num.add(b);
-        System.out.println("Add book successful");
 
+        try {
+            FileWriter f = new FileWriter("book.txt", true);
+            f.write(b.bookId + "," + b.title + "," + b.author + "\n");
+            f.close();
+
+            System.out.println("Add book successful");
+        } catch (IOException e) {
+            System.out.println("Error saving book!");
+        }
     }
+
 
     static boolean found;
 
@@ -70,6 +81,7 @@ class Book {
             System.out.println("Book Not Found");
         }
     }
+
     static void issue_book() {
         boolean found = false;
         Scanner sc = new Scanner(System.in);
@@ -97,7 +109,7 @@ class Book {
                 if (num.get(i).available) {
                     num.get(i).available = false;
                     num.get(i).issuedToStudent = student;
-                System.out.println("Book issued successfully!");
+                    System.out.println("Book issued successfully!");
                 } else {
                     System.out.println("Book already issued!");
                 }
@@ -110,65 +122,72 @@ class Book {
             System.out.println("Book not found!");
         }
     }
-    static void return_book(){
+
+    static void return_book() {
+        found = false;
         System.out.print("Enter book id : ");
         Scanner sc = new Scanner(System.in);
         int bookid = sc.nextInt();
-        for (int i =0;i<num.size();i++){
-            if(num.get(i).bookId==bookid){
+        for (int i = 0; i < num.size(); i++) {
+            if (num.get(i).bookId == bookid) {
                 found = true;
-                if(num.get(i).available==false) {
-                    num.get(i).available=true;
-                    num.get(i).issuedToStudent=null;
+                if (num.get(i).available == false) {
+                    num.get(i).available = true;
+                    num.get(i).issuedToStudent = null;
 
                     System.out.println("Book return successfully!");
-                }else{
+                } else {
                     System.out.println("Book not issue");
                 }
             }
-        }if(!found){
+        }
+        if (!found) {
             System.out.println("Book not found ");
         }
     }
-    static void Total_Book(){
 
-        System.out.println("Total Books : "+num.size());
+    static void Total_Book() {
+
+        System.out.println("Total Books : " + num.size());
     }
-    static void Book_Status(){
-        int count_available=0;
-        int count_issue=0;
-        for( int i=0;i<num.size();i++){
-            if(num.get(i).available==true){
+
+    static void Book_Status() {
+        int count_available = 0;
+        int count_issue = 0;
+        for (int i = 0; i < num.size(); i++) {
+            if (num.get(i).available == true) {
                 count_available++;
-            }else {
+            } else {
                 count_issue++;
             }
         }
-        System.out.println("Available Count : "+count_available);
-        System.out.println("Issue Count : "+count_issue);
+        System.out.println("Available Count : " + count_available);
+        System.out.println("Issue Count : " + count_issue);
 
     }
-    static void delete_book(){
-        found=true;
+
+    static void delete_book() {
+        found = true;
         System.out.print("Enter book id : ");
         Scanner sc = new Scanner(System.in);
         int bookid = sc.nextInt();
-        for (int i=0;i< num.size();i++){
-            if(num.get(i).bookId==bookid){
+        for (int i = 0; i < num.size(); i++) {
+            if (num.get(i).bookId == bookid) {
                 num.remove(i);
                 System.out.println("Delete book successful!!");
-                found=false;
+                found = false;
+                break;
             }
-        }if(found){
+        }
+        if (found) {
             System.out.println("Book Not Found");
         }
     }
 
 
-
     static ArrayList<Book> num = new ArrayList<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         while (true) {
             System.out.println();
             System.out.println("==================== LIBRARY MANAGEMENT SYSTEM ====================");
@@ -237,6 +256,7 @@ class Book {
         }
     }
 }
+
 
 
 
