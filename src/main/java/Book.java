@@ -54,15 +54,6 @@ class Book {
         Book b = new Book(book_id, title, author);
         num.add(b);
 
-        try {
-            FileWriter f = new FileWriter("book.txt", true);
-            f.write(b.bookId + "," + b.title + "," + b.author + "\n");
-            f.close();
-
-            System.out.println("Add book successful");
-        } catch (IOException e) {
-            System.out.println("Error saving book!");
-        }
     }
 
 
@@ -187,7 +178,7 @@ class Book {
     }
     static void loadBooks() {
         try {
-            BufferedReader br = new BufferedReader(new  FileReader("book.txt"));
+            BufferedReader br = new BufferedReader(new  FileReader("books.txt"));
 
             String line;
 
@@ -196,12 +187,30 @@ class Book {
                     continue;
                 }
                 String[] data = line.split(",");
+                if (data.length < 4) {
+                    continue;
+                }
 
                 int id = Integer.parseInt(data[0]);
                 String title = data[1];
                 String author = data[2];
+                boolean availability = Boolean.parseBoolean(data[3]);
+                String studentid = "";
+
+                if (data.length >= 5) {
+                    studentid = data[4];
+                }
 
                 Book b = new Book(id, title, author);
+                b.available = availability;
+                if (!studentid.isEmpty()) {
+                    for (int j = 0; j < Student.details.size(); j++) {
+                        if (Student.details.get(j).studentID.equals(studentid)) {
+                            b.issuedToStudent = Student.details.get(j);
+                            break;
+                        }
+                    }
+                }
                 num.add(b);
             }
 
@@ -210,14 +219,28 @@ class Book {
         } catch (IOException e) {
             System.out.println("Error loading books!");
         }
+    }static void saveBooks() {
+        try {
+            FileWriter f = new FileWriter("books.txt");
+            for(int i=0;i<num.size();i++) {
+            String studentid="";
+            if(num.get(i).issuedToStudent!=null){
+                studentid=num.get(i).issuedToStudent.studentID;
+            }
+                f.write(num.get(i).bookId+","+num.get(i).title+","+num.get(i).author+","+num.get(i).available+","+studentid+"\n");
+            }
+            f.close();
+        } catch (Exception e) {
+            System.out.println("Error saving book!");
+        }
     }
 
 
     static ArrayList<Book> num = new ArrayList<>();
 
-    public static void main(String[] args) throws IOException {
-        loadBooks();
+    public static void main (String[] args) throws IOException {
         Student.loading();
+        loadBooks();
         while (true) {
             System.out.println();
             System.out.println("==================== LIBRARY MANAGEMENT SYSTEM ====================");
@@ -242,6 +265,7 @@ class Book {
             switch (choice) {
                 case 1:
                     Add_book();
+                    saveBooks();
                     break;
                 case 2:
                     for (int i = 0; i < num.size(); i++) {
@@ -253,9 +277,11 @@ class Book {
                     break;
                 case 4:
                     issue_book();
+                    saveBooks();
                     break;
                 case 5 :
                     return_book();
+                    saveBooks();
                     break;
                 case 6:
                     Total_Book();
