@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args)throws IOException{
         Student.loading();
-        Book.loadBooks();
+        FileManager.loadBooks();
         while (true) {
             System.out.println();
             System.out.println("==================== LIBRARY MANAGEMENT SYSTEM ====================");
@@ -29,7 +29,7 @@ public class Main {
             switch (choice) {
                 case 1:
                     Book.Add_book();
-                    Book.saveBooks();
+                    FileManager.saveBooks();
                     break;
                 case 2:
                     for (int i = 0; i < Book.num.size(); i++) {
@@ -37,15 +37,15 @@ public class Main {
                     }
                     break;
                 case 3:
-                    Book.serach();
+                    Book.search();
                     break;
                 case 4:
                     Book.issue_book();
-                    Book.saveBooks();
+                    FileManager.saveBooks();
                     break;
                 case 5 :
                     Book.return_book();
-                    Book.saveBooks();
+                    FileManager.saveBooks();
                     break;
                 case 6:
                     Book.Total_Book();
@@ -55,7 +55,7 @@ public class Main {
                     break;
                 case 8:
                     Book.delete_book();
-                    Book.saveBooks();
+                    FileManager.saveBooks();
                     break;
                 case 9:
                     Student.Add_Student();
@@ -68,7 +68,7 @@ public class Main {
                     break;
                 case 12:
                     Student.Delete_student();
-                    Book.saveBooks();
+                    FileManager.saveBooks();
                     break;
                 case 13:
                     return;

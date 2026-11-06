@@ -4,7 +4,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 class Book {
 
@@ -46,6 +45,7 @@ class Book {
             System.out.println("Book ID already exists!");
             return;
         }
+
         sc.nextLine();
         System.out.print("Enter book title : ");
         String title = sc.nextLine();
@@ -59,7 +59,7 @@ class Book {
 
     static boolean found;
 
-    static void serach() {
+    static void search(){
         found = false;
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter book id : ");
@@ -174,64 +174,6 @@ class Book {
         }
         if (found) {
             System.out.println("Book Not Found");
-        }
-    }
-    static void loadBooks() {
-        try {
-            BufferedReader br = new BufferedReader(new  FileReader("books.txt"));
-
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                if (line.isBlank()) {
-                    continue;
-                }
-                String[] data = line.split(",");
-                if (data.length < 4) {
-                    continue;
-                }
-
-                int id = Integer.parseInt(data[0]);
-                String title = data[1];
-                String author = data[2];
-                boolean availability = Boolean.parseBoolean(data[3]);
-                String studentid = "";
-
-                if (data.length >= 5) {
-                    studentid = data[4];
-                }
-
-                Book b = new Book(id, title, author);
-                b.available = availability;
-                if (!studentid.isEmpty()) {
-                    for (int j = 0; j < Student.details.size(); j++) {
-                        if (Student.details.get(j).studentID.equals(studentid)) {
-                            b.issuedToStudent = Student.details.get(j);
-                            break;
-                        }
-                    }
-                }
-                num.add(b);
-            }
-
-            br.close();
-
-        } catch (IOException e) {
-            System.out.println("Error loading books!");
-        }
-    }static void saveBooks() {
-        try {
-            FileWriter f = new FileWriter("books.txt");
-            for(int i=0;i<num.size();i++) {
-            String studentid="";
-            if(num.get(i).issuedToStudent!=null){
-                studentid=num.get(i).issuedToStudent.studentID;
-            }
-                f.write(num.get(i).bookId+","+num.get(i).title+","+num.get(i).author+","+num.get(i).available+","+studentid+"\n");
-            }
-            f.close();
-        } catch (Exception e) {
-            System.out.println("Error saving book!");
         }
     }
     static ArrayList<Book> num = new ArrayList<>();
