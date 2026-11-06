@@ -303,6 +303,7 @@ class Book {
                     break;
                 case 12:
                     Student.Delete_student();
+                    saveBooks();
                     break;
                 case 13:
                     return;
