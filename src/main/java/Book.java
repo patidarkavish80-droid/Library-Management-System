@@ -234,83 +234,8 @@ class Book {
             System.out.println("Error saving book!");
         }
     }
-
-
     static ArrayList<Book> num = new ArrayList<>();
-
-    public static void main (String[] args) throws IOException {
-        Student.loading();
-        loadBooks();
-        while (true) {
-            System.out.println();
-            System.out.println("==================== LIBRARY MANAGEMENT SYSTEM ====================");
-            System.out.println("1.Add Book ");
-            System.out.println("2.Display Book ");
-            System.out.println("3.Search Book ");
-            System.out.println("4.issue Book ");
-            System.out.println("5.Return Book ");
-            System.out.println("6.Total Books ");
-            System.out.println("7.Book Status ");
-            System.out.println("8.Delete Books ");
-            System.out.println("9. Add Student ");
-            System.out.println("10. Display Students");
-            System.out.println("11. Search Student");
-            System.out.println("12. Delete Student");
-            System.out.println("13.Exit");
-            System.out.println();
-            System.out.print("Enter choice : ");
-            Scanner sc = new Scanner(System.in);
-            int choice = sc.nextInt();
-            System.out.println();
-            switch (choice) {
-                case 1:
-                    Add_book();
-                    saveBooks();
-                    break;
-                case 2:
-                    for (int i = 0; i < num.size(); i++) {
-                        num.get(i).Display_Details();
-                    }
-                    break;
-                case 3:
-                    serach();
-                    break;
-                case 4:
-                    issue_book();
-                    saveBooks();
-                    break;
-                case 5 :
-                    return_book();
-                    saveBooks();
-                    break;
-                case 6:
-                    Total_Book();
-                    break;
-                case 7:
-                    Book_Status();
-                    break;
-                case 8:
-                    delete_book();
-                    break;
-                case 9:
-                    Student.Add_Student();
-                    break;
-                case 10:
-                    Student.Display_Student();
-                    break;
-                case 11 :
-                    Student.Search_student();
-                    break;
-                case 12:
-                    Student.Delete_student();
-                    saveBooks();
-                    break;
-                case 13:
-                    return;
-                default:
-                    System.out.println("Invalid choice");
-            }
-        }
+    public static void main (String[] args) {
     }
 }
 
