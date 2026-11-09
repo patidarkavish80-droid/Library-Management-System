@@ -66,10 +66,6 @@ Library-Management-System/
 
 4. Use the console menu to manage books and students.
 
-## 🎯 Project Goal
-
-The goal of this project is to improve my Core Java programming skills through practical implementation of OOP concepts, collections, and file handling.
-
 ## 👨‍💻 Author
 
 **Kavish Patidar**
